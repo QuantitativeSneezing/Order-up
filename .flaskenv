@@ -1,0 +1,3 @@
+FLASK_ENV=development
+SECRET_KEY=qp02348jrqj43rpqj34pqjr
+FLASK_APP=order_up.py

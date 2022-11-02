@@ -16,10 +16,10 @@ def login():
         if not employee or not employee.check_password(form.password.data):
             return redirect(url_for(".login"))
         login_user(employee)
-        return redirect(url_for("orders.index"))
-    return render_template("login.html", form=form)
+        return redirect(url_for("orders.index", user=current_user))
+    return render_template("login.html", form=form, user=current_user)
 
 @bp.route('/logout', methods=["POST"])
 def logout():
     logout_user()
-    return redirect(url_for('.login'))
+    return redirect(url_for('.login', user=current_user))

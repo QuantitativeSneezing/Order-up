@@ -23,7 +23,7 @@ class Menu(db.Model):
     __tablename__= "menus"
     id = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(30), nullable= False )
-    menuItems = db.relationship("MenuItem", back_populates="menu", secondary= "menu_item_types")
+    menu_items = db.relationship("MenuItem", back_populates="menu")
 class MenuItem(db.Model):
     __tablename__= "menu_items"
     id = db.Column(db.Integer, primary_key=True)
@@ -32,15 +32,15 @@ class MenuItem(db.Model):
     menu_id= db.Column(db.Integer, db.ForeignKey("menus.id"), nullable= False)
     menu_type_id= db.Column(db.Integer, db.ForeignKey("menu_item_types.id"), nullable= False)
 
-    menus= db.relationship("MenuItem", back_populates= "menu")
-    menu_item_types= db.relationship("MenuItem", back_populates= "menu_item_type")
+    menu= db.relationship("Menu", back_populates= "menu_items")
+    type= db.relationship("MenuItemType", back_populates= "menu_items")
 
 class MenuItemType(db.Model):
     __tablename__= "menu_item_types"
     id = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(20), nullable= False )
 
-    menuItems = db.relationship("MenuItem", back_populates="menu_item_type", secondary= "menus")
+    menu_items = db.relationship("MenuItem", back_populates="type")
 
 class Table(db.Model):
     __tablename__= "tables"
